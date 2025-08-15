@@ -69,6 +69,30 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+		<!-- 
+			- jjwt-api: provides the main API for generating and verifying JWTs
+			- jjwt-impl: provides the implementation of the API. The runtime scope means that the dependency is only available during runtime.
+			- jjwt-jackson: provides a Jackson (JSON) based implementation of the jjwt-api. The runtime scope means that the dependency is only available during runtime.
+		 -->
+
+		<!-- JWT Dependencies -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>0.12.5</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>0.12.5</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>0.12.5</version>
+			<scope>runtime</scope>
+		</dependency>
 
 		<!-- Utilities -->
 		<dependency>

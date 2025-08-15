@@ -2,8 +2,10 @@ package com.jobtracker.backend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,7 +14,9 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import static org.springframework.security.config.Customizer.withDefaults;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 /*
  * This SecurityConfig class is used to configure Spring Security to use an in-memory
  * user details manager. It will store the user details in memory and use the
@@ -42,28 +46,32 @@ import org.springframework.security.config.Customizer;
  * annotated with @Bean. This method returns a BCryptPasswordEncoder object, which
  * is used to encode the passwords.
  */
+ import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 
  @Configuration
  @EnableWebSecurity
  public class SecurityConfig {
- 
-     @Bean
-     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-         http
-             .authorizeHttpRequests(auth -> auth
-                 .requestMatchers(
-                     "/v3/api-docs/**",
-                     "/swagger-ui/**",
-                     "/swagger-ui.html"
-                 ).permitAll()
-                 .anyRequest().authenticated()
-             )
-             .csrf(csrf -> csrf.disable())
-             .httpBasic(withDefaults());
- 
-         return http.build();
-     }
-     
+    @Bean
+ @Bean
+public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    http
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers(
+                "/v3/api-docs/**",
+                "/swagger-ui/**",
+                "/swagger-ui.html",
+                "/api/auth/**"  // This should cover both signup and signin
+            ).permitAll()
+            .anyRequest().authenticated()
+        )
+        .csrf(csrf -> csrf.disable())
+        .sessionManagement(session -> session
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        )
+        .httpBasic(withDefaults());
+
+    return http.build();
+}
      @Bean
      public PasswordEncoder passwordEncoder() {
          return new BCryptPasswordEncoder(); 
@@ -78,4 +86,10 @@ public InMemoryUserDetailsManager userDetailsService() {
         .build();
     return new InMemoryUserDetailsManager(user);
 }
+    //authenticationManager
+    @Bean
+    public AuthenticationManager authenticationManager(
+            AuthenticationConfiguration authConfig) throws Exception {
+        return authConfig.getAuthenticationManager();
+    }
  }
