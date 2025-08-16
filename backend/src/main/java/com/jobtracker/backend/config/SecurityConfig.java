@@ -51,7 +51,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
  @Configuration
  @EnableWebSecurity
  public class SecurityConfig {
-    @Bean
+    
  @Bean
 public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
