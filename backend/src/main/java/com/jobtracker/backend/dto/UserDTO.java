@@ -34,4 +34,6 @@ public class UserDTO {
     
     @Schema(description = "Timestamp when the user was created", example = "2025-08-06T10:00:00", accessMode = Schema.AccessMode.READ_ONLY)
     private String createdAt;
+
+    
 }
