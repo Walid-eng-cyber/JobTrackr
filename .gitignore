@@ -1,0 +1,21 @@
+# Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/.env.local
+
+# Backend
+jobtracker/backend/target/
+jobtracker/backend/.mvn/
+jobtracker/backend/mvnw.cmd
+jobtracker/backend/mvnw
+jobtracker/backend/.idea/
+jobtracker/backend/*.iml
+
+# System Files
+.DS_Store
+Thumbs.db
+.idea/
+*.iml
+*.log
