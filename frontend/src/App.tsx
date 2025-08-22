@@ -4,7 +4,7 @@ import { Plus } from 'lucide-react';
 import { Modal } from './components/ui/modal';
 import { StatusBadge } from './components/ui/StatusBadge';
 import { useState } from 'react';
-import type { JobApplication } from './components/types';
+import type { JobApplication } from './types';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);

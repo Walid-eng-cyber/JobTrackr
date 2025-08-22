@@ -6,7 +6,7 @@ import React  from "react";
  */
 
 import { Chip } from "@mui/material";
-import type { JobApplication } from "../types";
+import type { JobApplication } from "../../types";
 
 interface StatusBadgeProps {
     status: JobApplication["status"];
