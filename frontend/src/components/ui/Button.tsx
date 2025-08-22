@@ -1,6 +1,5 @@
 import React from "react";
 import {Button as MuiButton, CircularProgress} from "@mui/material";
-import { Icon } from 'lucide-react';
 import type { LucideIcon } from "lucide-react";
 
 /**
@@ -34,7 +33,6 @@ export const Button: React.FC<ButtonProps> = ({
     children,
     icon,
     variant = "contained",
-    sx,
     color = "primary",
     size = "medium",
     disabled ,
